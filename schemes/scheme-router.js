@@ -4,6 +4,7 @@ const Schemes = require('./scheme-model.js');
 
 const router = express.Router();
 
+/* GET REQUESTS */
 router.get('/', (req, res) => {
   Schemes.find()
   .then(schemes => {
@@ -42,10 +43,11 @@ router.get('/:id/steps', (req, res) => {
     }
   })
   .catch(err => {
-    res.status(500).json({ message: 'Failed to get steps' });
+    res.status(500).json({ message: 'Failed to get steps', error: err.message });
   });
 });
 
+/* POST REQUESTS */
 router.post('/', (req, res) => {
   const schemeData = req.body;
 
@@ -78,6 +80,7 @@ router.post('/:id/steps', (req, res) => {
   });
 });
 
+/* PUT REQUESTS */
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const changes = req.body;
@@ -98,6 +101,7 @@ router.put('/:id', (req, res) => {
   });
 });
 
+/* DELETE REQUESTS */
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
