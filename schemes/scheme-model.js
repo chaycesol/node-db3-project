@@ -25,6 +25,7 @@ function findById(id) {
 //returns steps by scheme id
 function findSteps(id) {
     return db('schemes AS s')
+        .where('s.id', '=', id)
         .join('steps AS p', 's.id','=', 'p.scheme_id')
         .select("p.id", "s.scheme_name", "p.step_number", "p.instructions")
 };
